@@ -110,6 +110,7 @@ public class RecognizeClient {
       @Override
       public void onNext(RecognizeResponse response) {
         logger.info("Received response: " +  TextFormat.printToString(response));
+        logger.info(response.getResultsList().get(0).getAlternativesList().get(0).getTranscript());
       }
 
       @Override
@@ -130,9 +131,10 @@ public class RecognizeClient {
     try {
       // Build and send a RecognizeRequest containing the parameters for processing the audio.
       InitialRecognizeRequest initial = InitialRecognizeRequest.newBuilder()
-          .setEncoding(AudioEncoding.LINEAR16)
+          .setEncoding(AudioEncoding.FLAC)
           .setSampleRate(samplingRate)
           .setInterimResults(true)
+          .setLanguageCode("ja-JP")
           .build();
       RecognizeRequest firstRequest = RecognizeRequest.newBuilder()
           .setInitialRequest(initial)

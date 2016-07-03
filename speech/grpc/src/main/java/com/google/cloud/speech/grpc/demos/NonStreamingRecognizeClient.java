@@ -114,8 +114,9 @@ public class NonStreamingRecognizeClient {
     }
     logger.info("Sending " + audio.getContent().size() + " bytes from audio uri input: " + input);
     InitialRecognizeRequest initial = InitialRecognizeRequest.newBuilder()
-        .setEncoding(AudioEncoding.LINEAR16)
+        .setEncoding(AudioEncoding.FLAC)
         .setSampleRate(samplingRate)
+        .setLanguageCode("ja-JP")
         .build();
     RecognizeRequest request = RecognizeRequest.newBuilder()
         .setInitialRequest(initial)
